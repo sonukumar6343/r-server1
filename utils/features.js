@@ -4,21 +4,12 @@ import { v4 as uuid } from "uuid";
 import { v2 as cloudinary } from "cloudinary";
 import { getBase64 } from "../lib/helper.js";
 
-const getDomainFromUrl = (url) => {
-  try {
-    const hostname = new URL(url).hostname;
-    return `.${hostname}`; // Ensures it works for subdomains
-  } catch (error) {
-    console.error("Invalid CLIENT_URL:", error);
-    return ".rupkala-iota.vercel.app"; // Default fallback domain
-  }
-};
+
 const cookieOptions = {
   maxAge: 24 * 60 * 60 * 1000, // 1 day
   sameSite: "None", // Required for cross-origin requests
   httpOnly: true, // Prevents client-side access
   secure: true,
-  domain: getDomainFromUrl(process.env.CLIENT_URL),// Ensures cookies are only sent over HTTPS
 };
 
 const connectDB = async (uri) => {
